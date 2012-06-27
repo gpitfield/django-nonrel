@@ -6,6 +6,7 @@ from django.db.models import signals
 from django.db import router
 from django.contrib.sites.models import Site
 from django.contrib.sites import models as site_app
+from django.conf import settings
 
 def create_default_site(app, created_models, verbosity, db, **kwargs):
     # Only create the default sites in databases where Django created the table
@@ -17,7 +18,7 @@ def create_default_site(app, created_models, verbosity, db, **kwargs):
         # (e.g. in the test suite after flush/syncdb), it isn't guaranteed that
         # the next id will be 1, so we coerce it. See #15573 and #16353. This
         # can also crop up outside of tests - see #15346.
-        s = Site(pk=1, domain="example.com", name="example.com")
+        s = Site(pk=settings.SITE_ID, domain="example.com", name="example.com")
         s.save(using=db)
     Site.objects.clear_cache()
 
