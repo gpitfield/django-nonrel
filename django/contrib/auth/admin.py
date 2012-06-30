@@ -75,7 +75,7 @@ class UserAdmin(admin.ModelAdmin):
     def get_urls(self):
         from django.conf.urls.defaults import patterns
         return patterns('',
-            (r'^(\d+)/password/$', self.admin_site.admin_view(self.user_change_password))
+            (r'^(.+)/password/$', self.admin_site.admin_view(self.user_change_password))
         ) + super(UserAdmin, self).get_urls()
 
     @csrf_protect_m

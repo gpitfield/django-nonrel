@@ -943,7 +943,6 @@ class ModelAdmin(BaseModelAdmin):
         "The 'change' admin view for this model."
         model = self.model
         opts = model._meta
-
         obj = self.get_object(request, unquote(object_id))
 
         if not self.has_change_permission(request, obj):
